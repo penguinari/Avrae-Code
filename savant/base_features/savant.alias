@@ -1,0 +1,19 @@
+<drac2>
+ch = character()
+
+lvl = ch.levels.get('Savant')
+
+try:
+    discipline = (load_json(ch.get_cvar('subclass')).get('SavantLevel')).lower()
+except:
+    discipline = ''
+
+lb = "\n"
+
+if lvl > 4:
+    swift_str = f'''-f "Swift Reflexes {'(Levels 5, 13, and 18)' if lvl > 17 else '(Levels 5 and 13)' if lvl > 12 else '(Level 5)'} | `!swift`" '''
+else:
+    swift_str = ""
+
+return f"""embed -title "{ch.name}'s Savant class features:" -desc "Add `help` after an alias to view its usage information." -f "Adroit Analysis (Level 1) | `!adroit` - View feature{lb}`focus` - Snippet for Dexterity-based weapon attack {lb}`sfocus` - Snippet for Strength-based weapon attack" -f "Predictive Defense (Level 1) | `!defense`" -f "Scholarly Pursuits {'(Levels 1, 4, 6, 7, 13, and 18)' if lvl > 17 and (discipline == 'investigator' or discipline == 'naturalist') else '(Levels 1, 4, 7, 13, and 18)' if lvl > 17 else '(Levels 1, 4, 6, 7, and 13)' if lvl > 12 and (discipline == 'investigator' or discipline == 'naturalist') else '(Levels 1, 4, 7, and 13)' if lvl > 12 else '(Levels 1, 4, 6, and 7)' if lvl > 6 and (discipline == 'investigator' or discipline == 'naturalist') else '(Levels 1, 4, and 7)' if lvl > 6 else '(Levels 1, 4, and 6)' if lvl > 5 and (discipline == 'investigator' or discipline == 'naturalist') else '(Levels 1 and 4)' if lvl > 3 else '(Level 1)'} | `!pursuits [name]` - List all pursuits or view specific pursuit{lb}`!pursuits add <name>` - Add pursuit to character{lb}`!pursuits remove <name>` - Remove pursuit from character" {f'-f "Genius Intellect (Level 2) | `!genius` - View feature{lb}`!calculated` - Use Calculated Flourish{lb}`!potent` - Use Potent Observation{lb}`!wondrous` - Use Wondrous Insight{lb}`!intdie` - Roll Intellect Die{lb}`!intdie2` - Roll Intellect Die twice and keep the highest result{lb}`intdie` - Snippet to add Intellect Die to roll{lb}`intdie2` - Snippet to add Intellect Die to roll, rolling twice and keeping the highest result" ' if lvl > 1 else ''} {'-f "Sharp Mind (Level 2) | `!sharp`" ' if lvl > 1 else ''} {f'-f "Academic Discipline (Level 3) | `!discipline` - List all subclass features{lb}`!discipline set <name>` - Set subclass" ' if lvl > 2 else ''} {'-f "Peerless Insights (Level 5) | `!peerless`" ' if lvl > 4 else ''} {swift_str} {f'-f "Keen Awareness (Level 7) | `!keen` - View feature{lb}`keen` - Snippet for initiative" ' if lvl > 6 else ''} {'-f "Predictive Expert (Level 9) | `!predictive`" ' if lvl > 8 else ''} {'-f "Unrivaled Genius (Level 11) | `!unrivaled`" ' if lvl > 10 else ''} {'-f "Unyielding Will (Level 14) | `!unyielding`" ' if lvl > 13 else ''} {'-f "Flawless Analysis (Level 17) | `!flawless [-i]`" ' if lvl > 16 else ''} {'-f "Incomparable Intellect (Level 20) | `!incomparable`" ' if lvl > 19 else ''} -thumb {image} -color {color}"""
+</drac2>
